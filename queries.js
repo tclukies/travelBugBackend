@@ -34,27 +34,73 @@ module.exports = {
     //location_post queries!!
 
     listPosts() {
-        return database("location_post").join(
-            "country",
-            "location_post.country_name",
-            "=",
-            "country.country_name"
-        );
+        return database("location_post")
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
+            .select({
+                location_post_id: "location_post.id",
+                country_id: "country.id",
+                profile_id: "location_post.profile_id",
+                country_name: "location_post.country_name",
+                goal_date: "location_post.goal_date",
+                activities: "location_post.activities",
+                visited: "location_post.visited",
+                latitude: "country.latitude",
+                longitude: "country.longitude"
+            });
     },
     readPosts(id) {
         return database("location_post")
-            .select()
-            .where("id", id)
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
+            .select({
+                location_post_id: "location_post.id",
+                country_id: "country.id",
+                profile_id: "location_post.profile_id",
+                country_name: "location_post.country_name",
+                goal_date: "location_post.goal_date",
+                activities: "location_post.activities",
+                visited: "location_post.visited",
+                latitude: "country.latitude",
+                longitude: "country.longitude"
+            })
+            .where("location_post.id", id)
             .first();
     },
     createPosts(location_post) {
         return database("location_post")
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
             .insert(location_post)
-            .returning("*")
+            .returning({
+                profile_id: "location_post.profile_id",
+                country_name: "location_post.country_name",
+                goal_date: "location_post.goal_date",
+                activities: "location_post.activities",
+                visited: "location_post.visited"
+            })
             .then(record => record[0]);
     },
     updatePosts(id, location_post) {
         return database("location_post")
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
             .update(location_post)
             .where("id", id)
             .returning("*")
@@ -62,6 +108,12 @@ module.exports = {
     },
     deletePosts(id) {
         return database("location_post")
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
             .delete()
             .where("id", id);
     }
