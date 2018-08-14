@@ -34,7 +34,7 @@ app.post("/profiles", (request, response, next) => {
     queries
         .createProfs(request.body)
         .then(profile => {
-            response.status(201).json({ profiles: profile });
+            response.status(201).json({ profile: profile });
         })
         .catch(next);
 });
@@ -52,7 +52,7 @@ app.put("/profiles/:id", (request, response, next) => {
     queries
         .updateProfs(request.params.id, request.body)
         .then(profile => {
-            response.json({ profiles: profile[0] });
+            response.json({ profile: profile[0] });
         })
         .catch(next);
 });

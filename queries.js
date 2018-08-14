@@ -34,7 +34,12 @@ module.exports = {
     //location_post queries!!
 
     listPosts() {
-        return database("location_post");
+        return database("location_post").join(
+            "country",
+            "location_post.country_name",
+            "=",
+            "country.country_name"
+        );
     },
     readPosts(id) {
         return database("location_post")
@@ -60,4 +65,14 @@ module.exports = {
             .delete()
             .where("id", id);
     }
+
+    //join  query?
+
+    // createPosts(location_post) {
+    //     return database("location_post")
+    //         .join("profile", "location_post.profile_id", "=", "profile.id")
+    //         .insert(location_post)
+    //         .returning("*")
+    //         .then(record => record[0]);
+    // }
 };
