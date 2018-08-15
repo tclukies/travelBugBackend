@@ -108,6 +108,17 @@ app.put("/posts/:id", (request, response, next) => {
         .catch(next);
 });
 
+app.get("/posts/profile/:id", (request, response, next) => {
+    queries
+        .readPostsByProfile_id(request.params.id)
+        .then(posts => {
+            posts
+                ? response.json({ posts })
+                : response.status(404).json({ message: "Not found" });
+        })
+        .catch(next);
+});
+
 // catch 404 and forward to error handler
 // app.use((req, res, next) => {
 //     const err = new Error("Not Found");
