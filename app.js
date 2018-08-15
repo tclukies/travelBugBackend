@@ -8,7 +8,7 @@ const cors = require("cors");
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
 
 //profiles routes!!
 
