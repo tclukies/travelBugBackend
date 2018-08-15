@@ -4,9 +4,13 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = parseInt(process.env.PORT || 3000);
 const queries = require("./queries.js");
+const cors = requre("cors")
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
+app.use(cors)
+
+
 
 //profiles routes!!
 
