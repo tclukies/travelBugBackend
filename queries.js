@@ -117,14 +117,4 @@ module.exports = {
             .delete()
             .where("id", id);
     }
-
-    //join  query?
-
-    // createPosts(location_post) {
-    //     return database("location_post")
-    //         .join("profile", "location_post.profile_id", "=", "profile.id")
-    //         .insert(location_post)
-    //         .returning("*")
-    //         .then(record => record[0]);
-    // }
 };
