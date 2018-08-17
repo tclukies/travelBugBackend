@@ -116,5 +116,27 @@ module.exports = {
             )
             .delete()
             .where("id", id);
+    },
+
+    readPostsByProfile_id(id) {
+        return database("location_post")
+            .join(
+                "country",
+                "location_post.country_name",
+                "=",
+                "country.country_name"
+            )
+            .select({
+                location_post_id: "location_post.id",
+                country_id: "country.id",
+                profile_id: "location_post.profile_id",
+                country_name: "location_post.country_name",
+                goal_date: "location_post.goal_date",
+                activities: "location_post.activities",
+                visited: "location_post.visited",
+                latitude: "country.latitude",
+                longitude: "country.longitude"
+            })
+            .where("profile_id", id);
     }
 };

@@ -4,11 +4,13 @@ const bodyParser = require("body-parser");
 const morgan = require("morgan");
 const port = parseInt(process.env.PORT || 3000);
 const queries = require("./queries.js");
-const cors = requre("cors");
+
+const cors = require("cors");
 
 app.use(morgan("dev"));
 app.use(bodyParser.json());
-app.use(cors);
+app.use(cors());
+
 
 //profiles routes!!
 
@@ -104,6 +106,17 @@ app.put("/posts/:id", (request, response, next) => {
         .updatePosts(request.params.id, request.body)
         .then(posts => {
             response.json({ posts: posts[0] });
+        })
+        .catch(next);
+});
+
+app.get("/posts/profile/:id", (request, response, next) => {
+    queries
+        .readPostsByProfile_id(request.params.id)
+        .then(posts => {
+            posts
+                ? response.json({ posts })
+                : response.status(404).json({ message: "Not found" });
         })
         .catch(next);
 });
