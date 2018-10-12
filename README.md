@@ -20,7 +20,7 @@ Back End Base Link: https://travel-bug-backend.herokuapp.com/
 
 ## Travel Bug Front End Deployed Link
 
-https://travel-bug-67eb1.firebaseapp.com/
+https://travelbug-b1270.firebaseapp.com/
 
 ## Travel Bug Front End Deployed Links
 
